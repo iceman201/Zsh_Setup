@@ -1,10 +1,19 @@
 export ZSH=$HOME/.oh-my-zsh
 export DEFAULT_USER='ljiao'
-
 export LDFLAGS='-L/usr/local/opt/libffi/lib'
 export LDFLAGS='-L/usr/local/opt/openssl/lib'
 export CPPFLAGS='-I/usr/local/opt/openssl/include'
 export PATH="/usr/local/opt/openssl/bin:$PATH"
+export PATH="$HOME/.rbenv/bin:$PATH"
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+
+# Product code 
+export CARDS_SDK_REPO_ANDROID_USERNAME="cardappsdk-mobility"
+export CARDS_SDK_REPO_ANDROID_PASSWORD="Test@789$"
+export CARDS_SDK_REPO_IOS_USERNAME="cardappsdk-mobility"
+export CARDS_SDK_REPO_IOS_PASSWORD="HGUqRqwMQf6rCrBZLfWL"
+
+eval "$(rbenv init -)"
 
 TERM=xterm-256color
 ZSH_THEME="powerlevel9k/powerlevel9k"
@@ -12,7 +21,7 @@ plugins=(
   git
   bundler
   dotenv
-  osx
+  macos
   rake
   rbenv
   ruby
@@ -58,7 +67,7 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time  status rvm time)
 
 ENABLE_CORRECTION="false"
 HIST_STAMPS="dd/mm/yyyy"
-plugins=(git git-extras gem bundler osx ruby rvm rails sudo sublime colorize history history-substring-search last-working-dir compleat zsh-completions zsh-history-substring-search zsh-autosuggestions zsh-syntax-highlighting zsh-syntax-highlighting-filetypes warhol)
+plugins=(git git-extras gem bundler macos ruby rvm rails sudo sublime colorize history history-substring-search last-working-dir compleat zsh-completions zsh-history-substring-search zsh-autosuggestions zsh-wakatime zsh-syntax-highlighting zsh-syntax-highlighting-filetypes warhol)
 autoload -U compinit && compinit
 source $ZSH/oh-my-zsh.sh
 bindkey '\e[A' history-beginning-search-backward
@@ -69,9 +78,24 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxc
 
 alias ls='colorls --sd'
 alias l='colorls'
-
 alias tellmewhothebest='git shortlog -sn --no-merges'
-alias python='python3'
-
+# alias python='python3'
+# GIT Short cut
 alias gcmm='gcmsg'
-alias gpl='git pull'
+alias gpr='git pull --rebase'
+alias cccc='grbc'
+alias aaaa='grba'
+alias ..='cd ..'
+alias ...='cd ...'
+alias grv='git remote -v'
+alias cleantheshit='rm -r /Users/ljiao/Library/Developer/Xcode/DerivedData'
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+NPM_PACKAGES="${HOME}/.npm-packages"
+
+export PATH="$PATH:$NPM_PACKAGES/bin"
+
+# Preserve MANPATH if you already defined it somewhere in your config.
+# Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
+export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
